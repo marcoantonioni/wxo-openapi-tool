@@ -1,0 +1,156 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "TestWxO",
+    "version" : "tipSnapshot"
+  },
+  "servers" : [ {
+    "url" : "https://bas-dev-demo-emea-10.automationcloud.ibm.com/automationservices/rest/MATWO/TestWxO"
+  } ],
+  "security" : [ {
+    "basic_auth" : [ ]
+  } ],
+  "paths" : {
+    "/test" : {
+      "summary" : "test",
+      "post" : {
+        "operationId" : "test",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/test_input"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/test_output"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "The request contains invalid parameters, or they are missing.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TestWxOException"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "The requested resource does not exist.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TestWxOException"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "The request cannot be processed because of one or more conflicts in the request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TestWxOException"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/TestWxOException"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Request" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Response" : {
+        "type" : "object",
+        "properties" : {
+          "result" : {
+            "type" : "string"
+          }
+        }
+      },
+      "TestWxOException" : {
+        "title" : "Exception",
+        "required" : [ "message" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "Exception code or Message ID of the exception."
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "Message text of the exception."
+          },
+          "message_parameters" : {
+            "type" : "array",
+            "description" : "Message text parameters of the exception.",
+            "items" : {
+              "type" : "string",
+              "description" : "An array of parameter strings that were inserted into the error message."
+            }
+          },
+          "cause" : {
+            "$ref" : "#/components/schemas/TestWxOException"
+          }
+        },
+        "description" : "Exception object describing error details."
+      },
+      "test_input" : {
+        "type" : "object",
+        "properties" : {
+          "request" : {
+            "$ref" : "#/components/schemas/Request"
+          }
+        },
+        "description" : "Input schema for the operation test",
+        "x-ibm-parameter-wrapper" : true
+      },
+      "test_output" : {
+        "type" : "object",
+        "properties" : {
+          "response" : {
+            "$ref" : "#/components/schemas/Response"
+          }
+        },
+        "description" : "Response schema of operation test",
+        "x-ibm-parameter-wrapper" : true
+      }
+    },
+    "securitySchemes" : {
+      "basic_auth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}

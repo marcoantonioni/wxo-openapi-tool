@@ -1,0 +1,275 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SimpleDemoREST",
+    "version": "tipSnapshot",
+    "description": "This is my api service"
+  },
+  "servers": [
+    {
+      "url": "https://cpd-cp4ba-all-but-adp-odm.apps.65bb6be8d300f00011674065.cloud.techzone.ibm.com/bas/automationservices/rest/SDWPS/SimpleDemoREST"
+    }
+  ],
+  "security": [
+    {
+      "basic_auth": []
+    },
+    {
+      "zen_api_key": []
+    }
+  ],
+  "paths": {
+    "/startService": {
+      "post": {
+        "summary": "MA- start service",
+        "operationId": "startService",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/startService_input"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/startService_output"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request contains invalid parameters, or they are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The request cannot be processed because of one or more conflicts in the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          }
+        },
+        "description": "MA- description of start service",
+        "x-ibm-nl-intent-examples": [
+          "do a thing",
+          "lets do another thing"
+        ]
+      }
+    },
+    "/startProcess": {
+      "post": {
+        "summary": "MA- start process",
+        "operationId": "startProcess",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/startProcess_input"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/startProcess_output"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request contains invalid parameters, or they are missing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The request cannot be processed because of one or more conflicts in the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SimpleDemoRESTException"
+                }
+              }
+            }
+          }
+        },
+        "description": "MA- description of start process",
+        "x-ibm-nl-intent-examples": [
+          "lets do a lot of things",
+          "do a last thing"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "counter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flag": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseData": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SimpleDemoRESTException": {
+        "title": "Exception",
+        "required": [
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Exception code or Message ID of the exception."
+          },
+          "message": {
+            "type": "string",
+            "description": "Message text of the exception."
+          },
+          "message_parameters": {
+            "type": "array",
+            "description": "Message text parameters of the exception.",
+            "items": {
+              "type": "string",
+              "description": "An array of parameter strings that were inserted into the error message."
+            }
+          },
+          "cause": {
+            "$ref": "#/components/schemas/SimpleDemoRESTException"
+          }
+        },
+        "description": "Exception object describing error details."
+      },
+      "startProcess_input": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RequestData"
+          }
+        },
+        "description": "Input schema for the operation startProcess",
+        "x-ibm-parameter-wrapper": true
+      },
+      "startProcess_output": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/ResponseData"
+          }
+        },
+        "description": "Response schema of operation startProcess",
+        "x-ibm-parameter-wrapper": true
+      },
+      "startService_input": {
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/RequestData"
+          }
+        },
+        "description": "Input schema for the operation startService",
+        "x-ibm-parameter-wrapper": true
+      },
+      "startService_output": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/ResponseData"
+          }
+        },
+        "description": "Response schema of operation startService",
+        "x-ibm-parameter-wrapper": true
+      }
+    },
+    "securitySchemes": {
+      "basic_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
