@@ -261,6 +261,10 @@ generateSummaryAndDescription() {
   echo "# The summary text is part of skill name in watsonx Orchestrate" >> ${_OUTPUT_SUMMARY_DESC}
   echo "# For 'intents' values add a comma separated list of phrases" >> ${_OUTPUT_SUMMARY_DESC}
   echo "" >> ${_OUTPUT_SUMMARY_DESC}
+  echo ""
+  echo "openapi.description" >> ${_OUTPUT_SUMMARY_DESC}
+  echo ""
+
   for _path in "${_paths[@]}"
   do
     _tmpName="${_path///}"
