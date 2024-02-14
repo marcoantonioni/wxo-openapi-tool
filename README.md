@@ -2,6 +2,17 @@
 
 ## Description
 
+This tool simplifies the manual operations necessary to import the definition file of an OpenAPI service into the "IBM watsonx Orchestrate" skills.
+
+It has been tested with OpenAPI exported from BAW of CP4BA v23.x and CP4BA SaaS v21.x.
+
+From a .json file that describes an OpenAPI it is possible to generate a text file that lists the various operations contained in the service.
+This file can be manually edited to define the descriptions, summaries and intent sentences for each operation that will define an "IBM watsonx Orchestrate" skill.
+
+This tool is not supported, you can make a clone of the repository and adapt it to your needs.
+
+Have fun with "IBM watsonx Orchestrate" !!!
+
 ## Usage
 
 ```
