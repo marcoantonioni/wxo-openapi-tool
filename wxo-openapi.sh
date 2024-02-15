@@ -88,7 +88,7 @@ updateInfo() {
   _input=$1
   _info=$2
   _output=$3
-  cat ${_input} | jq --arg param "$_info" '. + {info: $param}' > ${_output}
+  cat ${_input} | jq --argjson param "$_info" '. + {info: $param}' > ${_output}
 }
 
 createSnippetPath() {
@@ -103,6 +103,7 @@ createSnippetPath() {
 }
 
 updateSnippetPaths() {
+
   _FILE_IN=$1
   _FILE_IN_PATHS=$2
   _FILE_TMP_SNIPPET_PATHS="/tmp/wxo-openapi-sp-$USER-$RANDOM"
@@ -160,23 +161,7 @@ updateSnippetPaths() {
   _PATH_UPDATED=$(cat ${_FILE_TMP_SNIPPET_PATHS} | jq .)
   rm ${_FILE_TMP_SNIPPET_PATHS}
 
-#  _FILE_TMP_1=_tmp1.json
-#  _FILE_TMP_2=_tmp_wxo-service.json
-
-  #cat ${_FILE_IN} | jq --arg param {} '. + {paths: $param}' > ${_FILE_TMP_1}
-  #cat ${_FILE_TMP_1} | jq --arg param "${_PATH_UPDATED}" '. + {paths: $param}' > ${_FILE_TMP_2}
-  #cat ${_FILE_TMP_2} | sed 's/\\n//g' | sed 's/\\"/"/g' | sed 's/"{/{/g' | sed 's/}"/}/g' | jq . > ${_OUTPUT_FILE}
   cat ${_FILE_IN} | jq --argjson param "${_PATH_UPDATED}" '. + {paths: $param}' | jq . > ${_OUTPUT_FILE}
-
-  #cp ${_FILE_IN} ./output/f_in.json
-  #cp ${_FILE_TMP_1} ./output/f_tmp1.json
-  #cp ${_FILE_TMP_2} ./output/f_tmp2.json
-  #cp ${_OUTPUT_FILE} ./output/f_out.json
-
-  # rm ${_FILE_TMP_2}
-  # rm ${_FILE_TMP_1}
-
-
 }
 
 updateSecurity() {
@@ -229,7 +214,7 @@ adaptOpenapi() {
 
   _FILE_INFO="/tmp/wxo-openapi-$USER-$RANDOM"
   _FILE_TMP_PATHS="/tmp/wxo-temp-pat-$USER-$RANDOM.json"
-  _FILE_TMP_OUT="/tmp/wxo-temp-out-$USER-$RANDOM.json"
+  #_FILE_TMP_OUT="/tmp/wxo-temp-out-$USER-$RANDOM.json"
 
   _des=$(echo "${_TEXT_SUMM_DES}" | grep "openapi.description" | sed 's/openapi.description=//g' | sed 's/^[ \t]*//g' | sed 's/[ \t]*$//g')
   if [[ -z "$_des" ]]; then
@@ -242,17 +227,19 @@ adaptOpenapi() {
   _INFO=$(cat ${_FILE_INFO})
 
   updateInfo ${_INPUT_FILE} "${_INFO}" "${_FILE_INFO}"
-  cat ${_FILE_INFO} | sed 's/\\n//g' | sed 's/\\"/"/g' | sed 's/"{/{/g' | sed 's/}"/}/g' > ${_FILE_TMP_OUT}
+  #cat ${_FILE_INFO} | sed 's/\\n//g' | sed 's/\\"/"/g' | sed 's/"{/{/g' | sed 's/}"/}/g' > ${_FILE_TMP_OUT}
 
-  createSnippetPath ${_FILE_TMP_OUT} "${_PREFIX} ${_SUMMARY}" "${_PREFIX} ${_DESCRIPTION}" ${_FILE_TMP_PATHS}
+  #createSnippetPath ${_FILE_TMP_OUT} "${_PREFIX} ${_SUMMARY}" "${_PREFIX} ${_DESCRIPTION}" ${_FILE_TMP_PATHS}
+  createSnippetPath ${_FILE_INFO} "${_PREFIX} ${_SUMMARY}" "${_PREFIX} ${_DESCRIPTION}" ${_FILE_TMP_PATHS}
 
-  updateSnippetPaths ${_FILE_TMP_OUT} ${_FILE_TMP_PATHS}
+  #updateSnippetPaths ${_FILE_TMP_OUT} ${_FILE_TMP_PATHS}
+  updateSnippetPaths ${_FILE_INFO} ${_FILE_TMP_PATHS}
 
   if [[ ! -z "${_SECURITY}" ]]; then
     updateSecurity
   fi
 
-  rm ${_FILE_TMP_OUT}
+  # rm ${_FILE_TMP_OUT}
   rm ${_FILE_TMP_PATHS}
   rm ${_FILE_INFO}
 }
@@ -276,7 +263,9 @@ generateSummaryAndDescription() {
 
   for _path in "${_paths[@]}"
   do
-    _tmpName="${_path///}"
+    #_tmpName="${_path///}"
+_tmpName="${_path}"
+
     echo "# $_tmpName" >> ${_OUTPUT_SUMMARY_DESC}
     echo "$_tmpName.summary=" >> ${_OUTPUT_SUMMARY_DESC}
     echo "$_tmpName.description=" >> ${_OUTPUT_SUMMARY_DESC}
