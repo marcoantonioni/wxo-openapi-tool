@@ -156,17 +156,26 @@ updateSnippetPaths() {
     fi
   done
   echo "}" >> ${_FILE_TMP_SNIPPET_PATHS}
-  _PATH_UPDATED=$(cat ${_FILE_TMP_SNIPPET_PATHS})
 
+  _PATH_UPDATED=$(cat ${_FILE_TMP_SNIPPET_PATHS} | jq .)
   rm ${_FILE_TMP_SNIPPET_PATHS}
 
-  _FILE_TMP_1=_tmp1.json
-  _FILE_TMP_2=_tmp_wxo-service.json
-  cat ${_FILE_IN} | jq --arg param {} '. + {paths: $param}' > ${_FILE_TMP_1}
-  cat ${_FILE_TMP_1} | jq --arg param "${_PATH_UPDATED}" '. + {paths: $param}' > ${_FILE_TMP_2}
-  cat ${_FILE_TMP_2} | sed 's/\\n//g' | sed 's/\\"/"/g' | sed 's/"{/{/g' | sed 's/}"/}/g' | jq . > ${_OUTPUT_FILE}
-  rm ${_FILE_TMP_2}
-  rm ${_FILE_TMP_1}
+#  _FILE_TMP_1=_tmp1.json
+#  _FILE_TMP_2=_tmp_wxo-service.json
+
+  #cat ${_FILE_IN} | jq --arg param {} '. + {paths: $param}' > ${_FILE_TMP_1}
+  #cat ${_FILE_TMP_1} | jq --arg param "${_PATH_UPDATED}" '. + {paths: $param}' > ${_FILE_TMP_2}
+  #cat ${_FILE_TMP_2} | sed 's/\\n//g' | sed 's/\\"/"/g' | sed 's/"{/{/g' | sed 's/}"/}/g' | jq . > ${_OUTPUT_FILE}
+  cat ${_FILE_IN} | jq --argjson param "${_PATH_UPDATED}" '. + {paths: $param}' | jq . > ${_OUTPUT_FILE}
+
+  #cp ${_FILE_IN} ./output/f_in.json
+  #cp ${_FILE_TMP_1} ./output/f_tmp1.json
+  #cp ${_FILE_TMP_2} ./output/f_tmp2.json
+  #cp ${_OUTPUT_FILE} ./output/f_out.json
+
+  # rm ${_FILE_TMP_2}
+  # rm ${_FILE_TMP_1}
+
 
 }
 
