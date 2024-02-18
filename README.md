@@ -68,6 +68,6 @@ run
   -o ./output/wxo-openapi-adapted.json \
   -s basic \
   -k "MA-" \
-  -d ./services/test-openapi-cp4ba-techzone.txt
+  -d ./output/test-openapi-cp4ba-techzone.txt
 ```
 

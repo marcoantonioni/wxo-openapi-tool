@@ -3,11 +3,11 @@
   "info": {
     "title": "SimpleDemoREST",
     "version": "tipSnapshot",
-    "description": "This is my api service"
+    "description": "This is a test"
   },
   "servers": [
     {
-      "url": "https://cpd-cp4ba-all-but-adp-odm.apps.65bb6be8d300f00011674065.cloud.techzone.ibm.com/bas/automationservices/rest/SDWPS/SimpleDemoREST"
+      "url": "https://cpd-cp4ba-all-but-adp-odm.apps.65c9b730302c6f00127c7572.cloud.techzone.ibm.com/bas/automationservices/rest/SDWPS/SimpleDemoREST"
     }
   ],
   "security": [
@@ -21,7 +21,7 @@
   "paths": {
     "/startService": {
       "post": {
-        "summary": "MA- start service",
+        "summary": "MA- Start service summary",
         "operationId": "startService",
         "requestBody": {
           "content": {
@@ -85,16 +85,15 @@
             }
           }
         },
-        "description": "MA- description of start service",
+        "description": "MA- Start service description",
         "x-ibm-nl-intent-examples": [
-          "do a thing",
-          "lets do another thing"
+          "lets start a service"
         ]
       }
     },
     "/startProcess": {
       "post": {
-        "summary": "MA- start process",
+        "summary": "MA- Start process summary",
         "operationId": "startProcess",
         "requestBody": {
           "content": {
@@ -158,10 +157,9 @@
             }
           }
         },
-        "description": "MA- description of start process",
+        "description": "MA- Start process description",
         "x-ibm-nl-intent-examples": [
-          "lets do a lot of things",
-          "do a last thing"
+          "lets start a process"
         ]
       }
     }

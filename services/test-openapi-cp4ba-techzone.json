@@ -5,7 +5,7 @@
     "version" : "tipSnapshot"
   },
   "servers" : [ {
-    "url" : "https://cpd-cp4ba-all-but-adp-odm.apps.65bb6be8d300f00011674065.cloud.techzone.ibm.com/bas/automationservices/rest/SDWPS/SimpleDemoREST"
+    "url" : "https://cpd-cp4ba-all-but-adp-odm.apps.65c9b730302c6f00127c7572.cloud.techzone.ibm.com/bas/automationservices/rest/SDWPS/SimpleDemoREST"
   } ],
   "security" : [ {
     "basic_auth" : [ ]

@@ -264,7 +264,7 @@ generateSummaryAndDescription() {
   for _path in "${_paths[@]}"
   do
     #_tmpName="${_path///}"
-_tmpName="${_path}"
+    _tmpName="${_path}"
 
     echo "# $_tmpName" >> ${_OUTPUT_SUMMARY_DESC}
     echo "$_tmpName.summary=" >> ${_OUTPUT_SUMMARY_DESC}

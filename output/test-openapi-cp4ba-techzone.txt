@@ -1,0 +1,18 @@
+#==============================================================
+# Summaries and descriptions for file ./services/test-openapi-cp4ba-techzone.json
+# The summary text is part of skill name in watsonx Orchestrate
+# For 'intents' values add a comma separated list of phrases
+
+
+openapi.description=This is a test
+
+# /startService
+/startService.summary=Start service summary
+/startService.description=Start service description
+/startService.intents=lets start a service
+
+# /startProcess
+/startProcess.summary=Start process summary
+/startProcess.description=Start process description
+/startProcess.intents=lets start a process
+
